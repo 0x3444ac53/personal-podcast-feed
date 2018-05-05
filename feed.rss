@@ -1,0 +1,56 @@
+
+                <?xml version="1.0" encoding="utf-8"?>
+                <rss version="2.0" xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
+
+                <channel>
+                <title> Tanners Podcast </title>
+                <description> ???? </description>
+                <itunes:author>Tanner Galyean </itunes:author>
+                <link> http://104.131.56.81/ </link>
+                <itunes:image href="podcast_logo_grey.png" />
+                <pubDate> Sun, 09 Oct 2005 21:00:00 PST </pubDate>
+                <language>en-us</language>
+                <copyright> 1997 tanner galyean </copyright>
+                    
+                    <item>
+                    <title> What Every Girl Needs To Hear - A Response to Lauren Southern-v78x0X4O7sM </title>
+                    <description> A description of your podcast episode </description>
+                    <itunes:author> Tanner Galyean </itunes:author>
+                    <pubDate> 03:05PM on May 05, 2018 </pubDate>
+                    <enclosure url="http://104.131.56.81/" + What Every Girl Needs To Hear - A Response to Lauren Southern-v78x0X4O7sM.mp3 length=53283042 type="audio/mpeg" /> </item>
+                    
+                    <item>
+                    <title> odcast_logo_grey.png </title>
+                    <description> A description of your podcast episode </description>
+                    <itunes:author> Tanner Galyean </itunes:author>
+                    <pubDate> 03:05PM on May 05, 2018 </pubDate>
+                    <enclosure url="http://104.131.56.81/" + podcast_logo_grey.png length=1994 type="audio/mpeg" /> </item>
+                    
+                    <item>
+                    <title> DirCasterV09k.zi </title>
+                    <description> A description of your podcast episode </description>
+                    <itunes:author> Tanner Galyean </itunes:author>
+                    <pubDate> 03:05PM on May 05, 2018 </pubDate>
+                    <enclosure url="http://104.131.56.81/" + DirCasterV09k.zip length=1331545 type="audio/mpeg" /> </item>
+                    
+                    <item>
+                    <title> What The World Doesn't Know About John Oliver-1gdQW7zcmx8 </title>
+                    <description> A description of your podcast episode </description>
+                    <itunes:author> Tanner Galyean </itunes:author>
+                    <pubDate> 03:05PM on May 05, 2018 </pubDate>
+                    <enclosure url="http://104.131.56.81/" + What The World Doesn't Know About John Oliver-1gdQW7zcmx8.mp3 length=12211821 type="audio/mpeg" /> </item>
+                    
+                    <item>
+                    <title> htaccess </title>
+                    <description> A description of your podcast episode </description>
+                    <itunes:author> Tanner Galyean </itunes:author>
+                    <pubDate> 03:05PM on May 05, 2018 </pubDate>
+                    <enclosure url="http://104.131.56.81/" + .htaccess length=268 type="audio/mpeg" /> </item>
+                    
+                    <item>
+                    <title> umm.html </title>
+                    <description> A description of your podcast episode </description>
+                    <itunes:author> Tanner Galyean </itunes:author>
+                    <pubDate> 03:05PM on May 05, 2018 </pubDate>
+                    <enclosure url="http://104.131.56.81/" + umm.html length=508 type="audio/mpeg" /> </item>
+                    </channel></rss>
