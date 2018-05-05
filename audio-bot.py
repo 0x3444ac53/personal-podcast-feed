@@ -54,8 +54,7 @@ class StdOutListener(StreamListener):
 
         with open('feed.rss', 'w') as f:
             f.truncate()
-            f.write("""
-                <?xml version="1.0" encoding="utf-8"?>
+            f.write("""<?xml version="1.0" encoding="utf-8"?>
                 <rss version="2.0" xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
 
                 <channel>
