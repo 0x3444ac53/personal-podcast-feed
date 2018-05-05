@@ -1,9 +1,7 @@
 from __future__ import unicode_literals
-import youtube_dl
-
-# author=rhnvrm<hello@rohanverma.net>
-
 from __future__ import absolute_import, print_function
+import youtube_dl
+# author=rhnvrm<hello@rohanverma.net>
 import tweepy
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
@@ -23,7 +21,9 @@ class StdOutListener(StreamListener):
     def on_data(self, data):
         d = json.loads(data)
         print(d["text"] + '\n')
-
+        url_list = d["text"].split()
+        url_string = url_list[1]
+        self.download_aud(url_string)
         return True
 
     def on_direct_message(self, data):
@@ -55,3 +55,6 @@ def start():
     # change filters to listen to various types of tweets
     # eg try 'coldplay', '@rhnvrm', '#ACMSNU' etc
     stream.filter(track=["#personal-feed"])
+
+
+start()
