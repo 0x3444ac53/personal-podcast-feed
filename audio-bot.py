@@ -75,7 +75,7 @@ class StdOutListener(StreamListener):
                     <description> A description of your podcast episode </description>
                     <itunes:author> Tanner Galyean </itunes:author>
                     <pubDate> {} </pubDate>
-                    <enclosure url="http://104.131.56.81/" + {} length={} type="audio/mpeg" /> </item>
+                    <enclosure url="http://104.131.56.81/{}" length={} type="audio/mpeg" /> </item>
                     """.format(
                     i.strip('.mp3'), pubtime, i,
                     os.stat(i).st_size))
