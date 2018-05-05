@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # encoding: utf-8
 '''
 genRSS -- generate a RSS 2 feed from media files in a directory.
@@ -533,7 +532,7 @@ def main(argv=None):
         outfp.write('      <link>{0}</link>\n'.format(link))
 
         if opts.image is not None:
-            if opts.image.lower().startswith(
+            if optshttps://github.com/Lifesgood123/personal-podcast-feed.git.image.lower().startswith(
                     "http://") or opts.image.lower().startswith("https://"):
                 imgurl = opts.image
             else:
