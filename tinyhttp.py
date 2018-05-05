@@ -3,7 +3,7 @@
 import SimpleHTTPServer
 import SocketServer
 
-PORT = 8080
+PORT = 80
 
 try:
    Handler = SimpleHTTPServer.SimpleHTTPRequestHandler

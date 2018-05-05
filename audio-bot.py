@@ -9,6 +9,7 @@ from tweepy import Stream
 import json
 import key
 global api
+import os
 
 myurl = 'http://67.205.175.194:5745/'
 
