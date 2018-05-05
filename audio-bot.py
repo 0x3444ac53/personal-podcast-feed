@@ -44,7 +44,7 @@ class StdOutListener(StreamListener):
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([urll])
-
+        os.system('python podcasting.py -e "mp3,ogg" -d ./ -H 192.168.1.5:1234 -t "Podcast Title" -p "Podcast Description" -r -o feed.rss')
 
 def start():
     nolonger = StdOutListener()
