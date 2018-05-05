@@ -54,4 +54,4 @@ def start():
     stream = Stream(auth, nolonger)
     # change filters to listen to various types of tweets
     # eg try 'coldplay', '@rhnvrm', '#ACMSNU' etc
-    stream.userstream()
+    stream.filter(track=["#personal-feed"])
