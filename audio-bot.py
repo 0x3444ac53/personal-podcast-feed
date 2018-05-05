@@ -49,9 +49,9 @@ class StdOutListener(StreamListener):
     def gereate_feed(self):
         pubtime = datetime.datetime.now().strftime("%I:%M%p on %B %d, %Y")
         files = os.listdir('./')
-        for i in files:
-            if '.mp3' not in i:
-                files.pop(files.index(i))
+        approved = ['.mp3']
+        files[:] = [url for url in files if any(sub in url for sub in approved)]
+
         with open('feed.rss', 'w') as f:
             f.truncate()
             f.write("""
