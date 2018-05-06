@@ -13,7 +13,7 @@ def generate_feed():
         f.write("""<?xml version="1.0" encoding="utf-8"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
   <channel>
-    <title>Tanner's Podcast</title>
+    <title>SUP BITCH</title>
     <link>http://104.131.56.81/</link>
     <description>podcast</description>
      <itunes:summary />
@@ -41,10 +41,10 @@ def generate_feed():
     <itunes:author></itunes:author>
     <itunes:explicit>no</itunes:explicit>""")
         for i in files:
-            url = i.replace(' ', '%20')
+            url = "http://104.131.56.81/"+i.replace(' ', '%20')
             f.write("""<item>
       <title>{}</title>
-      <link>http://104.131.56.81/{}</link>
+      <link>{}</link>
       <comments>"?????"</comments>
       <itunes:author></itunes:author>
       <dc:creator></dc:creator>
