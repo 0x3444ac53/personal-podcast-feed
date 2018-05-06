@@ -8,7 +8,7 @@ def generate_feed():
     approved = ['.mp3']
     files[:] = [url for url in files if any(sub in url for sub in approved)]
 
-    with open('feed.rss', 'w') as f:
+    with open('feed.xml', 'w') as f:
         f.truncate()
         f.write("""<?xml version="1.0" encoding="utf-8"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
@@ -41,14 +41,20 @@ def generate_feed():
     <itunes:author></itunes:author>
     <itunes:explicit>no</itunes:explicit>""")
         for i in files:
-            f.write("""
-                    <item>
-                    <title> {} </title>
-                    <description> A description of your podcast episode </description>
-                    <itunes:author> Tanner Galyean </itunes:author>
-                    <pubDate> {} </pubDate>
-                    <enclosure url="http://104.131.56.81/{}" length={} type="audio/mpeg" /> </item>
-                    """.format(
-                i.strip('.mp3'), pubtime, i,
-                os.stat(i).st_size))
+            f.write("""<item>
+      <title>{}</title>
+      <link>http://104.131.56.81/{}</link>
+      <comments>"?????"</comments>
+      <itunes:author></itunes:author>
+      <dc:creator></dc:creator>
+      <description>Test</description>
+      <pubDate>Sat, 05 May 2018 23:34:57 GMT</pubDate>
+      <itunes:subtitle></itunes:subtitle>
+      <itunes:summary></itunes:summary>
+      <itunes:keywords></itunes:keywords>
+      <itunes:duration>00:00:00</itunes:duration>
+      <enclosure url="{}" length="{}" type="audio/mpeg" />
+      <guid>{}</guid>
+      <itunes:explicit>no</itunes:explicit>
+    </item>""".format(i, i.replace(' ', '%20'), i.replace('', '%20'), os.stat(i).st_size(), i))
         f.write("</channel></rss>")
