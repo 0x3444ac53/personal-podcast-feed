@@ -44,7 +44,7 @@ class StdOutListener(StreamListener):
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([urll])
-        generate_feed()
+        feed_gen.generate_feed()
 
 
 def start():
