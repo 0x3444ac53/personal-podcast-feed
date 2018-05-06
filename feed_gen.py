@@ -41,6 +41,7 @@ def generate_feed():
     <itunes:author></itunes:author>
     <itunes:explicit>no</itunes:explicit>""")
         for i in files:
+            url = i.replace(' ', '%20')
             f.write("""<item>
       <title>{}</title>
       <link>http://104.131.56.81/{}</link>
@@ -56,5 +57,5 @@ def generate_feed():
       <enclosure url="{}" length="{}" type="audio/mpeg" />
       <guid>{}</guid>
       <itunes:explicit>no</itunes:explicit>
-    </item>""".format(i, i.replace(' ', '%20'), i.replace(' ', '%20'), os.stat(i).st_size, i))
+    </item>""".format(i, url, url, os.stat(i).st_size, i))
         f.write("</channel></rss>")
