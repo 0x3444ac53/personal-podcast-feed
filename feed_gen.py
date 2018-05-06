@@ -56,5 +56,5 @@ def generate_feed():
       <enclosure url="{}" length="{}" type="audio/mpeg" />
       <guid>{}</guid>
       <itunes:explicit>no</itunes:explicit>
-    </item>""".format(i, i.replace(' ', '%20'), i.replace('', '%20'), os.stat(i).st_size, i))
+    </item>""".format(i, i.replace(' ', '%20'), i.replace(' ', '%20'), os.stat(i).st_size, i))
         f.write("</channel></rss>")
