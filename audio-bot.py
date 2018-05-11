@@ -11,7 +11,9 @@ import key
 global api
 import os
 import datetime
-import feed_gen
+import lone_feed_gen
+import random
+import string
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
@@ -33,6 +35,9 @@ class StdOutListener(StreamListener):
         print(status)
 
     def download_aud(self, urll):
+        random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+        os.system('mkdir {}'.format(random_string))
+        os.chdir(random_string)
         ydl_opts = {
             'format':
             'bestaudio/best',
@@ -41,11 +46,12 @@ class StdOutListener(StreamListener):
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
             }],
+            'outtmpl': '%(title)s-%(id)s.%(ext)s'
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([urll])
-        feed_gen.generate_feed()
-
+        feed_gen.generate_feed(random_string)
+        pi.update_status('http://104.131.56.81/{}').format(lone_feed_gen.urlgen()[-1])
 
 def start():
     nolonger = StdOutListener()
