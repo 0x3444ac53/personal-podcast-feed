@@ -51,8 +51,8 @@ class StdOutListener(StreamListener):
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([urll])
         lone_feed_gen.generate_feed(random_string)
-        pi.update_status('http://104.131.56.81/{}').format(lone_feed_gen.urlgen()[-1])
-
+        api.update_status('http://104.131.56.81/{}').format(lone_feed_gen.urlgen()[-1])
+        os.chdir('../')
 def start():
     nolonger = StdOutListener()
     auth = OAuthHandler(key.consumer_key, key.consumer_secret)
