@@ -46,7 +46,7 @@ class StdOutListener(StreamListener):
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
             }],
-            'outtmpl': '%(title)s-%(id)s.%(ext)s'
+            'outtmpl': '%(playlist_index)s---%(title)s-%(id)s.%(ext)s'
         }
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([urll])
