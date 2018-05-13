@@ -6,8 +6,8 @@ def generate_feed(vidfile):
     files = os.listdir('./{}/'.format(vidfile))
     approved = ['.mp3']
     files[:] = [url for url in files if any(sub in url for sub in approved)]
-    feedfile = urlgen('../')
-    feedfile = '../'+feedfile[0]
+    feedfile = urlgen()
+    feedfile = feedfile[0]
     
     
 
