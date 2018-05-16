@@ -1,7 +1,7 @@
 import datetime
 import os
 import re
-from urllib import quote
+import urllib
 
 def generate_feed(vidfile):
     os.chdir(vidfile)
@@ -51,7 +51,7 @@ def generate_feed(vidfile):
     <itunes:explicit>no</itunes:explicit>""".format(name, name))
         for i in files:
             pubtime = datetime.datetime.now().strftime('%a, %d %B %Y %H:%M:%S')
-            url = "http://104.131.56.81/{}/{}".format(str(vidfile), quote(i))
+            url = "http://104.131.56.81/{}/{}".format(str(vidfile), urllib.parse.quote(i))
             f.write("""<item>
       <title>{}</title>
       <link>{}</link>
