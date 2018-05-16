@@ -3,11 +3,15 @@ import os
 import re
 
 def generate_feed(vidfile):
-    files = os.listdir('./{}/'.format(vidfile))
+    os.chdir(vidfile)
+    print('Chdir')
+    files = os.listdir('.')
+    print(files)
     approved = ['.mp3']
     files[:] = [url for url in files if any(sub in url for sub in approved)]
-    feedfile = urlgen('./')
-    feedfile = feedfile[0]
+    feedfile = urlgen('../')
+    os.chdir(vidfile)
+    feedfile = '../{}'.format(feedfile[0])
     
     
 
@@ -17,7 +21,7 @@ def generate_feed(vidfile):
         f.write("""<?xml version="1.0" encoding="utf-8"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
   <channel>
-    <title>SUP BITCH</title>
+    <title>{}</title>
     <link>http://104.131.56.81/</link>
     <description>podcast</description>
      <itunes:summary />
@@ -43,7 +47,7 @@ def generate_feed(vidfile):
     </itunes:owner>
     
     <itunes:author></itunes:author>
-    <itunes:explicit>no</itunes:explicit>""".format(name))
+    <itunes:explicit>no</itunes:explicit>""".format(name, name))
         for i in files:
             pubtime = datetime.datetime.now().strftime('%a, %d %B %Y %H:%M:%S')
             url = "http://104.131.56.81/{}/{}".format(str(vidfile),i.replace(' ', '%20'))
@@ -66,7 +70,8 @@ def generate_feed(vidfile):
         f.write("</channel></rss>")
 
 def urlgen(pathto):
-    files = os.listdir(pathto)
+    os.chdir('../')
+    files = os.listdir('./')
     regex = re.compile('feed[0-9].xml')
     filestr = ''
     for i in files:
