@@ -3,16 +3,15 @@ import os
 import re
 import urllib
 
-def generate_feed(vidfile):
-    os.chdir(vidfile)
+def generate_feed(title):
+    os.chdir(title)
     print('Chdir')
     files = os.listdir('.')
     print(files)
     approved = ['.mp3']
     files[:] = [url for url in files if any(sub in url for sub in approved)]
-    feedfile = urlgen('../')
     os.chdir(vidfile)
-    feedfile = '../{}'.format(feedfile[0])
+    feedfile = '../{}'.format(title)
     
     
 
@@ -51,7 +50,7 @@ def generate_feed(vidfile):
     <itunes:explicit>no</itunes:explicit>""".format(name, name))
         for i in files:
             pubtime = datetime.datetime.now().strftime('%a, %d %B %Y %H:%M:%S')
-            url = "http://104.131.56.81/{}/{}".format(str(vidfile), urllib.parse.quote(i))
+            url = "http://104.131.56.81/{}/{}".format(urllib.parse.quote(str(title)), urllib.parse.quote(i))
             f.write("""<item>
       <title>{}</title>
       <link>{}</link>
@@ -70,14 +69,3 @@ def generate_feed(vidfile):
     </item>""".format(i, url, pubtime, url, os.stat(i).st_size, i))
         f.write("</channel></rss>")
 
-def urlgen(pathto):
-    os.chdir('../')
-    files = os.listdir('./')
-    regex = re.compile('feed[0-9].xml')
-    filestr = ''
-    for i in files:
-        filestr += i + '\n'
-    mo = regex.findall(filestr)
-    print(filestr)
-    mo.sort(key=os.path.getmtime)
-    return mo

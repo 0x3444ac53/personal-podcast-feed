@@ -14,6 +14,9 @@ import datetime
 import lone_feed_gen
 import random
 import string
+import re
+
+url_regex = re.compile('https?://+')
 
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
@@ -23,9 +26,15 @@ class StdOutListener(StreamListener):
     def on_data(self, data):
         d = json.loads(data)
         print(d["text"] + '\n')
-        url_list = d["text"].split()
-        url_string = url_list[1]
-        self.download_aud(url_string)
+        tweett = d["text"].split(' ')
+        link = tweett[1]
+        tweett.pop(1)
+        tweett.pop(0)
+        title = ''
+        for i in tweett:
+            title += i+' '
+        print(title)
+        self.download_aud(link, title)
         return True
 
     def on_direct_message(self, data):
@@ -34,10 +43,9 @@ class StdOutListener(StreamListener):
     def on_error(self, status):
         print(status)
 
-    def download_aud(self, urll):
-        random_string = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
-        os.system('mkdir {}'.format(random_string))
-        os.chdir(random_string)
+    def download_aud(self, urll, title):
+        os.system('mkdir {}'.format(title.replace(' ', '\ ')))
+        os.chdir(title)
         ydl_opts = {
             'format':
             'bestaudio/best',
@@ -51,7 +59,7 @@ class StdOutListener(StreamListener):
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([urll])
         os.chdir('../')
-        lone_feed_gen.generate_feed(random_string)
+        lone_feed_gen.generate_feed(title)
         os.chdir('../')
 def start():
     nolonger = StdOutListener()
