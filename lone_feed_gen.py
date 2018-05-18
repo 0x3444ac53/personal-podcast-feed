@@ -10,7 +10,7 @@ def generate_feed(title):
     print(files)
     approved = ['.mp3']
     files[:] = [url for url in files if any(sub in url for sub in approved)]
-    os.chdir(vidfile)
+    os.chdir(title)
     feedfile = '../{}'.format(title)
     
     
