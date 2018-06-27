@@ -31,11 +31,13 @@ class StdOutListener(StreamListener):
         link = tweett[1]
         tweett.pop(1)
         tweett.pop(0)
+        screen_name = d['user']['screen_name']
+        tweetId = d['results'][0]['id']
         title = ''
         for i in tweett:
             title += i+' '
         print(title)
-        self.download_aud(link, title)
+        self.download_aud(link, title, screen_name, tweetId)
         return True
 
     def on_direct_message(self, data):
@@ -44,7 +46,7 @@ class StdOutListener(StreamListener):
     def on_error(self, status):
         print(status)
 
-    def download_aud(self, urll, title):
+    def download_aud(self, urll, title, screen_name, tweet_id):
         os.system('mkdir {}'.format(title.replace(' ', '\ ')))
         os.chdir(title)
         ydl_opts = {
@@ -62,10 +64,11 @@ class StdOutListener(StreamListener):
         os.chdir('../')
         file_string = lone_feed_gen.generate_feed(title).split('/')[1]
         os.chdir('../')
-        self.reply(filestring)
+        self.reply(filestring, screen_name, tweet_id)
 
-    def reply(self, file_string):
+    def reply(self, file_string, screen_name, tweet_id):
         link_text = parse("http://sailor.pictures/{}".format(filestring))
+        api.update_status("@{} {}".format(tweet_id, link_text), tweet_id)
         
 
 
