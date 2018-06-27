@@ -1,7 +1,8 @@
 import datetime
 import os
 import re
-import urllib
+from urllib import parse
+
 
 def generate_feed(title):
     os.chdir(title)
@@ -10,8 +11,7 @@ def generate_feed(title):
     print(files)
     approved = ['.mp3']
     files[:] = [url for url in files if any(sub in url for sub in approved)]
-    os.chdir(title)
-    feedfile = '../{}'.format(title)
+    feedfile = '../{}.xml'.format(title)
     
     
 
@@ -42,7 +42,7 @@ def generate_feed(title):
     <height>100</height>
     </image>
     <itunes:owner>
-      <itunes:name>Tanner Galyean</itunes:name>
+      <itunes:name>Lucy Sailor</itunes:name>
       <itunes:email>sprinklelong@gmail.com</itunes:email>
     </itunes:owner>
     
@@ -50,7 +50,7 @@ def generate_feed(title):
     <itunes:explicit>no</itunes:explicit>""".format(name, name))
         for i in files:
             pubtime = datetime.datetime.now().strftime('%a, %d %B %Y %H:%M:%S')
-            url = "http://104.131.56.81/{}/{}".format(urllib.parse.quote(str(title)), urllib.parse.quote(i))
+            url = "http://sailor.pictures/{}/{}".format(parse.quote(str(title)), parse.quote(i))
             f.write("""<item>
       <title>{}</title>
       <link>{}</link>
@@ -68,4 +68,5 @@ def generate_feed(title):
       <itunes:explicit>no</itunes:explicit>
     </item>""".format(i, url, pubtime, url, os.stat(i).st_size, i))
         f.write("</channel></rss>")
-
+        os.chdir('../')
+    return feedfile

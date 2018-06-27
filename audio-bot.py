@@ -26,6 +26,7 @@ class StdOutListener(StreamListener):
     def on_data(self, data):
         d = json.loads(data)
         print(d["text"] + '\n')
+
         tweett = d["text"].split(' ')
         link = tweett[1]
         tweett.pop(1)
@@ -59,8 +60,15 @@ class StdOutListener(StreamListener):
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             ydl.download([urll])
         os.chdir('../')
-        lone_feed_gen.generate_feed(title)
+        file_string = lone_feed_gen.generate_feed(title).split('/')[1]
         os.chdir('../')
+        self.reply(filestring)
+
+    def reply(self, file_string):
+        link_text = parse("http://sailor.pictures/{}".format(filestring))
+        
+
+
 def start():
     nolonger = StdOutListener()
     auth = OAuthHandler(key.consumer_key, key.consumer_secret)
