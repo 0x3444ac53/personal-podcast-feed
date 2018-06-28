@@ -68,7 +68,7 @@ class StdOutListener(StreamListener):
         self.reply(file_string, screen_name, tweet_id)
 
     def reply(self, file_string, screen_name, tweet_id):
-        link_text = parse("http://sailor.pictures/{}".format(file_string))
+        link_text = parse.quote("http://sailor.pictures/{}".format(file_string))
         api.update_status("@{} {}".format(tweet_id, link_text), tweet_id)
         
 
