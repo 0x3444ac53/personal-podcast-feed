@@ -15,6 +15,8 @@ import lone_feed_gen
 import random
 import string
 import re
+from urllib import parse
+
 
 url_regex = re.compile('https?://+')
 
@@ -25,14 +27,13 @@ class StdOutListener(StreamListener):
 
     def on_data(self, data):
         d = json.loads(data)
-        print(d["text"] + '\n')
-
+        print(d)
         tweett = d["text"].split(' ')
         link = tweett[1]
         tweett.pop(1)
         tweett.pop(0)
         screen_name = d['user']['screen_name']
-        tweetId = d['results'][0]['id']
+        tweetId = d['id']
         title = ''
         for i in tweett:
             title += i+' '
@@ -64,10 +65,10 @@ class StdOutListener(StreamListener):
         os.chdir('../')
         file_string = lone_feed_gen.generate_feed(title).split('/')[1]
         os.chdir('../')
-        self.reply(filestring, screen_name, tweet_id)
+        self.reply(file_string, screen_name, tweet_id)
 
     def reply(self, file_string, screen_name, tweet_id):
-        link_text = parse("http://sailor.pictures/{}".format(filestring))
+        link_text = parse("http://sailor.pictures/{}".format(file_string))
         api.update_status("@{} {}".format(tweet_id, link_text), tweet_id)
         
 
