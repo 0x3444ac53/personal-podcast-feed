@@ -74,14 +74,12 @@ class StdOutListener(StreamListener):
 
 
 def start():
-    nolonger = StdOutListener()
-    auth = OAuthHandler(key.consumer_key, key.consumer_secret)
-    auth.set_access_token(key.access_token, key.access_token_secret)
-    api = tweepy.API(auth)
-    stream = Stream(auth, nolonger)
-    # change filters to listen to various types of tweets
-    # eg try 'coldplay', '@rhnvrm', '#ACMSNU' etc
     stream.filter(track=["#personal-feed"])
 
-
+nolonger = StdOutListener()
+auth = OAuthHandler(key.consumer_key, key.consumer_secret)
+auth.set_access_token(key.access_token, key.access_token_secret)
+api = tweepy.API(auth)
+stream = Stream(auth, nolonger)
+ 
 start()
