@@ -18,27 +18,26 @@ import re
 from urllib import parse
 
 
-url_regex = re.compile('https?://+')
-
 class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
     This is a basic listener that just prints received tweets to stdout.
     """
+    def parse_tweet(self, tweet_text):
+        url_regex = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
+        link = url_regex.findall(tweet_text)[0]
+        title = tweet_text.strip("#personal-feed")
+        title2 = title.strip("link")
+        return {'title':title2, 'link':link}
+
 
     def on_data(self, data):
         d = json.loads(data)
         print(d)
-        tweett = d["text"].split(' ')
-        link = tweett[1]
-        tweett.pop(1)
-        tweett.pop(0)
+        parsed_tweet = self.parse_tweet(d['text'])
         screen_name = d['user']['screen_name']
         tweetId = d['id']
-        title = ''
-        for i in tweett:
-            title += i+' '
-        print(title)
-        self.download_aud(link, title, screen_name, tweetId)
+        print(parsed_tweet)
+#       self.download_aud(parsed_tweet['link'], parsed_tweet'title', screen_name, tweetId)
         return True
 
     def on_direct_message(self, data):
@@ -48,7 +47,7 @@ class StdOutListener(StreamListener):
         print(status)
 
     def download_aud(self, urll, title, screen_name, tweet_id):
-        os.system('mkdir {}'.format(title.replace(' ', '\ ')))
+        os.mkdir(title)
         os.chdir(title)
         ydl_opts = {
             'format':
