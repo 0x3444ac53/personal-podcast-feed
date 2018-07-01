@@ -22,22 +22,24 @@ class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
     This is a basic listener that just prints received tweets to stdout.
     """
-    def parse_tweet(self, tweet_text):
+    """    def parse_tweet(self, tweet_text):
         url_regex = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
-        link = url_regex.findall(tweet_text)[0]
+        link = 
         title = tweet_text.strip("#personal-feed")
-        title2 = title.strip("link")
+        title2 = title.strip(link)
         return {'title':title2, 'link':link}
-
-
+    """
     def on_data(self, data):
         d = json.loads(data)
         print(d)
-        parsed_tweet = self.parse_tweet(d['text'])
+        #parsed_tweet = self.parse_tweet(d['text'])
         screen_name = d['user']['screen_name']
         tweetId = d['id']
-        print(parsed_tweet)
-#       self.download_aud(parsed_tweet['link'], parsed_tweet'title', screen_name, tweetId)
+        link = d['entities']['urls'][0]['expanded_url']
+        tweet_text = d['text'].strip(d['entities']['urls'][0]['url'])
+        tweet_text = re.sub('#\S+', '', tweet_text)
+        tweet_text = re.sub('http\S+\s*', '', tweet_text)
+        self.download_aud(link, tweet_text, screen_name, tweetId)
         return True
 
     def on_direct_message(self, data):
@@ -73,7 +75,7 @@ class StdOutListener(StreamListener):
 
 
 def start():
-    stream.filter(track=["#personal-feed"])
+    stream.filter(track=["#personalfeed"])
 
 nolonger = StdOutListener()
 auth = OAuthHandler(key.consumer_key, key.consumer_secret)
