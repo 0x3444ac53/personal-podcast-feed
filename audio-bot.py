@@ -22,17 +22,9 @@ class StdOutListener(StreamListener):
     """ A listener handles tweets that are received from the stream.
     This is a basic listener that just prints received tweets to stdout.
     """
-    """    def parse_tweet(self, tweet_text):
-        url_regex = re.compile('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+')
-        link = 
-        title = tweet_text.strip("#personal-feed")
-        title2 = title.strip(link)
-        return {'title':title2, 'link':link}
-    """
     def on_data(self, data):
         d = json.loads(data)
         print(d)
-        #parsed_tweet = self.parse_tweet(d['text'])
         screen_name = d['user']['screen_name']
         tweetId = d['id']
         link = d['entities']['urls'][0]['expanded_url']
@@ -69,8 +61,8 @@ class StdOutListener(StreamListener):
         self.reply(file_string, screen_name, tweet_id)
 
     def reply(self, file_string, screen_name, tweet_id):
-        link_text = parse.quote("http://sailor.pictures/{}".format(file_string))
-        api.update_status("@{} {}".format(tweet_id, link_text), tweet_id)
+        link_text = parse.quote("{}".format(file_string))
+        api.update_status("@{} {}{}".format(screen_name, "http://sailor.pictures/",link_text), tweet_id)
         
 
 
